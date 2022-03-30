@@ -28,12 +28,12 @@
     <hr>
     <ul class="list">
       <li v-for="item in page_items">
-        <span @click="select(item)">{{ item.title }}({{item.created}})</span>
+        <span @click="select(item)">{{ item.title }} ({{item.created}})</span>
       </li>
     </ul>
     <hr>
     <div class="nav">
-      <span @click="prev">&lt;prev</span>|
+      <span @click="prev">&lt;prev</span> |
       <span @click="next">next&gt;</span>
     </div>
   </section>
@@ -80,13 +80,13 @@ export default {
           Math.ceil((this.$store.state.memo.memo.length -1)
           / this.num_per_page) - 1 : p;
         pg = pg < 0 ? 0 : pg;
-        this.$sore.commit('memo/set_page', pg);
+        this.$store.commit('memo/set_page', pg);
       }
     },
   },
   methods: {
     set_flg: function(){
-      if (this.find_flg || this.set_flg != false){
+      if (this.find_flg || this.sel_flg != false){
         this.find_flg = false;
         this.sel_flg = false;
         this.title = '';
@@ -108,8 +108,8 @@ export default {
       if (this.sel_flg == false) {
         return;
       } else {
-        this.$store.commit('memo/remove', this.set_flg);
-        this.set_flg;
+        this.$store.commit('memo/remove', this.sel_flg);
+        this.set_flg();
       }
     },
     find: function(){
